@@ -1,0 +1,147 @@
+.hamburger{
+  z-index: 1000;
+}
+/* ボタン */
+.menuBtn {
+  position: absolute;
+  right: 0;
+  box-sizing: border-box;
+  z-index: 1;
+  width: 50px;
+  height: 55px;
+  text-align: center;
+  display: block;
+  border: 2px solid #000;
+  font-size: 12px;
+  padding-top: 35px;
+  background-color: #fff;
+}
+.menuBtn::after,
+.menuBtn::before {
+  content: '';
+  display: block;
+  /* height: 2px; */
+  width: 30px;
+  border-bottom: solid 2px #000;
+  position: absolute;
+  top: 10px;
+  left: 8px;
+  box-sizing: border-box;
+  /* border-width: 0; */
+  /* border-color: transparent; */
+  transition:transform.3s;
+}
+.menuBtn::after {
+  border-bottom: none;
+  border-top: solid 2px #000;
+  box-shadow: 0 -10px 0 #000;
+  top: 30px;
+}
+/* クリックした時の挙動 */
+.on .menuBtn::before {
+  width: 17px;
+  height: 17px;
+  border-right: 2px solid #000;
+  transform: rotate(45deg);
+  top: 3px;
+  left: 14px;
+}
+.on .menuBtn::after {
+  top: 24px;
+  left: 14px;
+  width: 17px;
+  height: 17px;
+  border-right: 2px solid #000;
+  box-shadow: none;
+  transform: rotate(-45deg);
+}
+.menuWrapper{
+  width: 50px;
+  height: 55px;
+  top: 15px;
+  right: 15px;
+  position: absolute;
+  overflow: hidden;
+  /* 背景のみアニメーション */
+  transition: background-color .3s;
+}
+.menuWrapper:hover{
+  cursor: pointer;
+}
+/* メニュー開時、背景クリックで閉じられるエリアを作成 */
+.on.menuWrapper {
+  box-sizing: border-box;
+  left: 0;
+  top: 0;
+  padding: 15px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.5);
+}
+/* 位置がずれるので調整 */
+.on.menuWrapper .menuBtn{
+  right: 15px;
+}
+/* overflow:hidden width:0 で隠しておく */
+#menu {
+  padding: 0;
+  margin: 0;
+  width: 0;
+  overflow: hidden;
+  list-style: none;
+  position: absolute;
+  right: 0;
+  height: 100%;
+  background: #000;
+  color: #fff;
+  /* width 幅のみアニメーション */
+  transition: width .5s;
+  padding-top: 90px;
+  box-sizing: border-box;
+}
+#menu li{
+  width: 200px;
+  border-bottom: 1px solid #fff;
+}
+#menu li a{
+  padding: 15px;
+  display: block;
+  opacity: 0;
+  text-decoration: none;
+  color: #fff;
+  transition: .3s;
+}
+#menu li a:hover{
+  background: #333;
+}
+#menu li:first-child{
+  border-top: 1px solid #fff;
+}
+/* 開いた時にスライドインできるようにメニューwidthを本来の幅へ
+width: 0=> width: 200pxのアニメーション
+*/
+.on.menuWrapper + #menu{
+  width: 200px;
+}
+/* メニューアイテムのアニメーション */
+.on.menuWrapper + #menu li:nth-child(1) a{
+  animation: slideIn .3s .5s forwards;
+}
+.on.menuWrapper + #menu li:nth-child(2) a{
+  animation: slideIn .3s .7s forwards;
+}
+.on.menuWrapper + #menu li:nth-child(3) a{
+  animation: slideIn .3s .9s forwards;
+}
+@keyframes slideIn{
+  0% {
+    padding-left: 25px;
+    opacity: 0;
+  }
+  50% {
+  }
+  100% {
+    padding-left: 15px;
+    opacity: 1;
+  }
+}
